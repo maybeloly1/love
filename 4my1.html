@@ -1,0 +1,115 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إهداء بنفسجي تفاعلي</title>
+    <style>
+        /* تصميم الخلفية والألوان */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: radial-gradient(circle, #2e0249, #570a57); /* خلفية بنفسجية عميقة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: crosshair;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            pointer-events: none; /* لكي لا تعيق الفأرة */
+        }
+
+        .bouquet {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 15px #bf94e4);
+        }
+
+        h1 {
+            color: #bf94e4; /* لون بنفسجي فاتح */
+            font-size: 5rem;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(191, 148, 228, 0.6);
+            animation: pulse 2s infinite;
+            user-select: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* تصميم الوردة المتطايرة */
+        .flower-particle {
+            position: absolute;
+            pointer-events: none;
+            color: #bf94e4;
+            animation: floatAway 3s linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatAway {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        #music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #bf94e4;
+            color: #2e0249;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="music-btn" onclick="toggleMusic()">تشغيل الموسيقى 💜</button>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <span class="bouquet">🪻💐</span>
+        <h1>أحبك صلوحي </h1>
+    </div>
+
+    <script>
+        // دالة إنشاء الورد عند حركة الفأرة (مثل التصميم الأول)
+        document.addEventListener('mousemove', function(e) {
+            createFlower(e.clientX, e.clientY);
+        });
+
+        // دعم شاشات اللمس
+        document.addEventListener('touchstart', function(e) {
+            createFlower(e.touches[0].clientX, e.touches[0].clientY);
+        });
+
+        function createFlower(x, y) {
+            const flower = document.createElement('div');
+            flower.classList.add('flower-particle');
+            
+            // مصفوفة من الرموز البنفسجية
+            const items = ['🪻', '💜', '🌸', '✨'];
+            flower.innerHTML = items[Math.floor(Math.random() * items.length)];
+            
+            flower.style.left = x + 'px';
+            flower.style.top = y + 'px';
+            
+            const size = Math.random() * 25 + 15 + 'px';
+            flower.style.fontSize = size;
